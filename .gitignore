@@ -1,0 +1,10 @@
+# Python / Conda
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+
+# 系统/编辑器
+.DS_Store
+.vscode/
+.idea/
