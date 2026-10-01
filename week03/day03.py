@@ -9,15 +9,15 @@ s=y*250
 print(s)
 
 #==================不高兴的津津===============
-max=0
+mx=0
 week=0
 for day in range(1,8):
     a,b=map(int,input().split())
     total=a+b
-    if total>max:
-        max=total
+    if total>mx:
+        mx=total
         week=day
-if max<=8:
+if mx<=8:
         week=0
 print(week)
         
