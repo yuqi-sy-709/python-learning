@@ -1,4 +1,4 @@
-# 中国bmi标准
+# 中国bmi标准 复杂度O(1)
 h,w=eval(input("请输入您的身高（米）和体重（千克）（逗号隔开）："))
 bmi=w/h**2
 print("您的 BMI 值为：",bmi)
@@ -15,14 +15,14 @@ elif bmi>=32.0:
     who="严重肥胖"
 print(who)
 
-# 计算圆周率
+# 计算圆周率 复杂度O(n)
 pi=0
 N=100
 for i in range(0,N):
     pi+=1/pow(16,i)*(4/(8*i+1)-2/(8*i+4)-1/(8*i+5)-1/(8*i+6))
 print("圆周率值：{}".format(pi))
 
-# 蒙特卡洛算法计算圆周率
+# 蒙特卡洛算法计算圆周率 复杂度O(n)
 #公式：Π=4*（hits/Darts)
 from random import random
 from time import perf_counter
