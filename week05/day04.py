@@ -1,4 +1,4 @@
-# P5709 Apples Prologue / 苹果和虫子
+# P5709 Apples Prologue / 苹果和虫子 （1)
 m,t,s=map(int,input().split())
 if t==0:
     print(0)
@@ -11,14 +11,14 @@ else:
     if l<0:
         l=0
     print(l)
-# P5722 数列求和
+# P5722 数列求和 （n)
 n=int(input())
 num=0
 for i in range(1,n+1):
     num+=i
 print(num)
 
-# P5736 质数筛
+# P5736 质数筛 （n√m）
 n=int(input())                   
 nums=list(map(int,input().split()))  
 for x in nums:                     
@@ -30,5 +30,5 @@ for x in nums:
             is_prime=False        
             break                   
     if is_prime:
-        print(x, end=" ")
+        print(x, end="")
 
