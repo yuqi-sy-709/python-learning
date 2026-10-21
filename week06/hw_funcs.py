@@ -12,7 +12,7 @@ def rvs(s):
     else:
         return rvs(s[1:])+s[0]
 
-# 递归 阶乘 迭代版
+# 阶乘 迭代版
 def fact_iter(n):
     s=1
     for i in range(1,n+1):
