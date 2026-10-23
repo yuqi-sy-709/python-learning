@@ -57,3 +57,12 @@ def is_prime(n):
 
 print("斐波那契：", fib(0), fib(1), fib(10))
 print("素数：", is_prime(0), is_prime(1), is_prime(2), is_prime(9))
+
+# 辗转相除
+def gcd(a,b):
+    if a<b:
+        a,b=b,a
+    while b!=0:
+        a,b=b,a%b
+    return a
+print("GCD：", gcd(12,18), gcd(7,13), gcd(0,5))
