@@ -8,3 +8,6 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# 预学/测试沙盒（程序运行产物，不进仓库）
+week07/test_mini1/
