@@ -6,7 +6,7 @@ from pathlib import Path # 路径处理核心库
 import shutil            # 文件移动/复制 
 import datetime          # 时间戳转人类可读时间 
 import os                # 备用（周六 os.walk 再细讲）
-
+import sys               # 命令行参数（周六再细）
 # 测试目录：放在当前 week07/ 下的 test_mini1 子目录，避免污染 Mini-1 正式代码
 TEST_DIR=Path(__file__).parent/'test_mini1'
 
@@ -162,3 +162,66 @@ print ( f"\n目录 {new_dir} 创建成功： {new_dir.exists()} " )
 new_dir=TEST_DIR / 'a' / 'b' / 'c'
 new_dir.mkdir(parents= True , exist_ok= True )
 print(f'\n目录{new_dir} 创建成功：{new_dir.exists()}')
+
+# ===============10.31=================
+
+# 函数名：with open 追加写日志,给日志加时间戳，
+# 参数：参数：open(路径, 'a', encoding='utf-8')；f.write(字符串)
+# 返回值：无：with 块结束自动关文件
+# ======================================== 
+log=TEST_DIR / 'move_log.txt'
+with open(log,'a',encoding='utf-8') as f:
+    f.write(f'{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} | temp.txt→moved/temp.txt\n')
+with open(log,'a',encoding='utf-8') as f:
+    f.write(f'{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} | temp.JPG→moved/temp.JPG\n')
+print('日志已写入,请打开move_log.txt查看')
+
+
+# ========================================
+# 函数名：try/except PermissionError
+# 作用：文件被占用时不崩溃，跳过继续
+# ========================================
+victim=TEST_DIR / 'locked.txt'
+victim.write_text('占用测试', encoding='utf-8')
+f=open(victim, 'r', encoding='utf-8')   
+try:
+    old = TEST_DIR / 'moved' / 'locked.txt'
+    if old.exists():
+        old.unlink()      # 删掉上次残留的
+    shutil.move(str(victim), str(TEST_DIR / 'moved'))
+    print('移动成功')
+except PermissionError:
+    print('文件被占用，跳过')
+f.close()
+
+# 变形练习：批量搬运 + 占用跳过 + 写日志
+files = [TEST_DIR / 'a.txt', TEST_DIR / 'b.txt']
+for p in files:
+    p.write_text('测试', encoding='utf-8')          # 先把文件造出来
+
+lock = open(files[1], 'r', encoding='utf-8')        # 占用 b.txt
+log = TEST_DIR / 'move_log.txt'
+
+for p in files:
+    try:
+        dst = TEST_DIR / 'moved' / p.name
+        if dst.exists():
+            dst.unlink()
+        shutil.move(str(p), str(dst))
+        with open(log, 'a', encoding='utf-8') as lf:
+            lf.write(f'{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} | {p.name} -> moved/{p.name}\n')
+    except PermissionError:
+        with open(log, 'a', encoding='utf-8') as lf:
+            lf.write(f'{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} | {p.name} 跳过\n')
+
+lock.close()
+
+# ========================================
+# 函数名：sys.argv
+# 返回值：list[str]，argv[0]=脚本名，argv[1]=第一个参数
+# ========================================
+print(f'命令行参数：{sys.argv}')
+if len(sys.argv) > 1 and sys.argv[1] == 'real':
+    print('真搬运模式')
+else:
+    print('预览模式（默认，不真搬）')
