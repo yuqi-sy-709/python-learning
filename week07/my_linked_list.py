@@ -73,9 +73,45 @@ def reverse():
         curr=nxt
     head['next']=prev
 
+def find_mid():
+    global head
+    slow=head['next']
+    if slow==None:
+        return None
+    fast=head['next']
+    while fast != None and fast['next'] != None:
+        slow=slow['next']
+        fast=fast['next']['next']
+    return slow['data']
+
+def has_cycle():
+    global head
+    slow=head['next']
+    fast=head['next']
+    while fast != None and fast['next'] != None:
+        slow=slow['next']
+        fast=fast['next']['next']
+        if slow is fast:
+            return True
+    return False
+
+
 if __name__ == '__main__':
-    append(10); append(20); append(30)
+    append(10); append(20); append(30);append(40)
+    p=head['next']
+    while p['next']!=None:
+        p=p['next']
+    p['next']=head['next']['next']
+    #print_list()
+    #print(get(0), get(1), get(2))
+    #insert(1, 99); print_list()
+    #reverse(); print_list()
+    #print(find_mid())
+    print(has_cycle())
+    p['next']=None
     print_list()
-    print(get(0), get(1), get(2))
-    insert(1, 99); print_list()
-    reverse(); print_list()
+    head['next'] = None; size = 0        # 清空链表（head 的下一个指向 None，就是空表了）
+    append(10)                           # 链表变成 [10]
+    head['next']['next'] = head['next']  # 节点 10 的 next 指向它自己 → 自环
+    print(has_cycle())                   # 期望 True
+    head['next']['next'] = None          # 拆掉自环，恢复成正常的 [10]
