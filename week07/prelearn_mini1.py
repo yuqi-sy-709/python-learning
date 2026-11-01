@@ -225,3 +225,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'real':
     print('真搬运模式')
 else:
     print('预览模式（默认，不真搬）')
+
+# os.walk 遍历TEST_DIR
+for dirpath, dirnames, filenames in os.walk(TEST_DIR):
+    print(f"dirpath={dirpath}, dirnames={dirnames}, filenames={filenames}")
