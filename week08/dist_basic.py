@@ -39,6 +39,27 @@ def pop_tail():
         raise IndexError("链表为空")
     pop(size-1)
 
+def pop_left():
+    global head,size
+    if size==0:
+        raise IndexError("链表为空")
+    first=head['next']
+    head['next']=first['next']
+    if first != None:
+        head['next']['prev']=head
+    size-=1
+    return first['data']
+def pop_right():
+    global head,size
+    if size==0:
+        raise IndexError("链表为空")
+    last=head['next']
+    while last['next']!=None:
+        last=last['next']
+    last['prev']['next']=None
+    size-=1
+    return last['data']
+
 def print_forward():
     p=head['next']
     res=[]
@@ -59,9 +80,12 @@ def print_backward():
 
 if __name__=='__main__':
     head['next']=None;size=0
-    insert_head(20)
-    insert_head(10)
+    insert_tail(10)
+    insert_tail(20)
     insert_tail(30)
-    pop(1)
+    print_forward()
+    pop_left()
+    print_forward()
+    pop_right()
     print_forward()
     print_backward()
