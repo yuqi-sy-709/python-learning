@@ -1,7 +1,13 @@
-students=[
-    {'name':'张三','score':90},
-    {'name':'李四','score':85},
-]
+import json
+from pathlib import Path
+
+scores_path = Path(__file__).parent / "scores.json"
+
+if scores_path.exists():
+    with open(scores_path, "r", encoding="utf-8") as f:
+        students = json.load(f)
+else:
+    students = []
 
 def add_student():
     name=input("请输入姓名：")
@@ -81,6 +87,8 @@ def main():
             statistics() 
         elif choice == "0" : 
             print ( "再见" ) 
+            with open(scores_path, "w", encoding="utf-8") as f:
+                json.dump(students, f, ensure_ascii=False, indent=2)
             break 
         else : 
             print ( "无效选择" )
