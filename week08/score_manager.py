@@ -21,8 +21,8 @@ def delete_student():
         if s['name']==name:
             students.pop(i)
             print(f"{name} 已删除")
-            return 
-        print(f"{name} 未找到")
+            return
+    print(f"{name} 未找到")
 
 def update_score():
     name=input("请输入要修改的名字：")
@@ -31,8 +31,8 @@ def update_score():
             new_score=int(input("请输入新的成绩："))
             s['score']=new_score
             print(f"{name} 已修改为 {new_score}")
-            return 
-        print(f"{name} 未找到")
+            return
+    print(f"{name} 未找到")
 
 def query():
     name=input("请输入要查询的姓名（回车查全部):")
@@ -43,8 +43,8 @@ def query():
     for s in students:
         if s['name']==name:
             print(f"{name} {s['score']}")
-            return 
-        print(f"{name} 未找到")
+            return
+    print(f"{name} 未找到")
 
 def sort_by_score():
     sorted_list=sorted(students,key=lambda s:s['score'],reverse=True)
