@@ -1,3 +1,24 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return self.items == []
+
+    def push(self, x):
+        self.items.append(x)
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("空栈不能出")
+        return self.items.pop()
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("空栈没有栈顶")
+        return self.items[-1]
+
+        
 class LinkedStack:
     def __init__(self):
         #self.items = []          # len(self.items)=size
@@ -30,14 +51,15 @@ class LinkedStack:
             raise IndexError("空栈没有栈顶")
         return self.head['next']['data']
 
-print("--- 链栈测试 ---")
-s2 = LinkedStack()
-s2.push(10)
-s2.push(20)
-s2.push(30)
-print(s2.peek())
-print(s2.pop())
-print(s2.pop())
-print(s2.is_empty())
-print(s2.pop())
-print(s2.is_empty())
+if __name__ == '__main__':
+    print("--- 链栈测试 ---")
+    s2 = LinkedStack()
+    s2.push(10)
+    s2.push(20)
+    s2.push(30)
+    print(s2.peek())
+    print(s2.pop())
+    print(s2.pop())
+    print(s2.is_empty())
+    print(s2.pop())
+    print(s2.is_empty())
